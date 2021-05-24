@@ -1,20 +1,32 @@
 'use strict';
 
-console.log(4 + +'6');
+let question = ''; // Задать вопрос: "Сколько фильмов вы уже посмотрели?"
 
-let incr = 10,
-  decr = 10;
+let numberOfFilms = ''; // ответ от пользователя на вопрос: "Сколько фильмов вы уже просмотрели?"
 
-// ++incr;
-// --decr;
-console.log(++incr);
-console.log(--decr);
+let personalMovieDB = {
+  count: '', // первый ответ на  вопрос
+  movies: '', // в это свойство поместить пустой обьект
+  actors: '', // тоже поместить пустой обьект
+  genres: '', // поместить пустой массив
+  privat: false // поместить boolean значение false
+};
 
-console.log(5 % 2);
+// Задать пользователю по два раза вопросы:
+let question1 = prompt('Один из последних просмотренных фильмов?');
+let question2 = prompt('На сколько вы можете его оценить?');
+//
+let question12 = prompt('Один из последних просмотренных фильмов?');
+let question22 = prompt('На сколько вы можете его оценить?');
+//Ответы поместить в отдельные переменные
 
-console.log(2 * 4 === 8);
+let answer1 = '';
+let answer2 = '';
 
-const isChecked = false,
-  isClose = false;
-
-console.log(isChecked || !isClose);
+//Записать ответы в обьект movies в формате:
+/*
+    movies: {
+      'logan': '8.1'
+    }
+Проверить, чтобы все работало в консоли
+*/
