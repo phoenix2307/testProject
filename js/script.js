@@ -3,15 +3,7 @@
 // Задать вопрос: "Сколько фильмов вы уже посмотрели?"
 // ответ от пользователя на вопрос: "Сколько фильмов вы уже просмотрели?"
 const numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
-if (numberOfFilms < 10) {
-  alert('Просмотрено довольно мало фильмов');
-} else if (numberOfFilms >= 10 && numberOfFilms <= 30) {
-  alert('Вы классический зритель');
-} else if (numberOfFilms > 30) {
-  alert('Вы киноман');
-} else {
-  alert('Произошла ошибка!');
-}
+
 
 
 let personalMovieDB = {
@@ -22,11 +14,33 @@ let personalMovieDB = {
   privat: false // поместить boolean значение false
 };
 
+if (personalMovieDB.count < 10) {
+  alert('Просмотрено довольно мало фильмов');
+} else if (personalMovieDB.count >= 10 && personalMovieDB.count <= 30) {
+  alert('Вы классический зритель');
+} else if (personalMovieDB.count > 30) {
+  alert('Вы киноман');
+} else {
+  alert('Произошла ошибка!');
+}
+
 for (let i = 0; i < 2; i++) {
   let answer1 = prompt('Один из последних просмотренных фильмов?', '');
   let answer12 = prompt('На сколько вы можете его оценить?', '');
-  personalMovieDB.movies[answer1] = answer12;
-}
+  /*проверка ответов на условия по ТЗ
+  (если ответ не равен null (null возвращается, когда в prompt мы нажимаем отмену
+   или оставляем пустую строку))*/
+  if (answer1 != null && answer12 != null && answer1 != '' && answer12 != '' && answer1.length < 50) {
+    personalMovieDB.movies[answer1] = answer12;
+    console.log('done');
+  } else { //возвращение пользователя к повторному ответу н вопросы
+    console.log('error');
+    i--; // перекидывает нас в начало цикла с уменьшенным значением итератора, для еще одной попытки до тех пор, пока
+  }
+
+};
+
+
 
 // let i = 0;
 // while (i < 2) {
