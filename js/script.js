@@ -43,8 +43,7 @@ function rememberMyFilms() {
 
   }
 }
-
-rememberMyFilms();
+// rememberMyFilms();
 
 function detectPersonalLevel() {
   if (personalMovieDB.count < 10) {
@@ -61,7 +60,46 @@ function detectPersonalLevel() {
     // alert('Произошла ошибка!');
   }
 }
-
 detectPersonalLevel();
 
-console.log(personalMovieDB);
+// если у меня не приватные настройки, то показывать мой главный объект
+// суть функции - если аргумент не равен себе (это то же самое что аргумент == false), то вывести в консоль...
+// мой вариант понятнее для меня, но не такой красивый
+
+/*
+function showMyDB() {
+  if (personalMovieDB.privat == false) {
+    console.log(personalMovieDB);
+  }
+}
+*/
+function showMyDB(hidden) {
+  if (!hidden) {
+    console.log(personalMovieDB);
+  }
+}
+showMyDB(personalMovieDB.privat);
+
+
+
+/*function writeYourGenres() {
+  for (let i = 1; i <= 3; i++) {
+    let genre = +prompt(`Ваш любимый жанр под номером ${i}`);
+    personalMovieDB.genres.push(genre);
+  }
+}*/
+function writeYourGenres() {
+  for (let i = 1; i <= 3; i++) {
+    // let genre = prompt(`Ваш любимый жанр под номером ${i}`);
+    // personalMovieDB.genres[i - 1] = genre;
+
+    // с использованием метода массивов .push()
+    // personalMovieDB.genres.push(genre);
+
+    // либо вообще без локальной переменной:
+    personalMovieDB.genres[i - 1] = prompt(`Ваш любимый жанр под номером ${i}`);
+
+  }
+}
+
+writeYourGenres();

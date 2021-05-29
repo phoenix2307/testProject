@@ -36,3 +36,8 @@ console.log(Math.round(num)); // 12 округляет до ближайшего
 const test = '12.5px';
 console.log(parseInt(test)); // 12 в целые
 console.log(parseFloat(test)); // 12.5 в дробные
+
+// МАССИВЫ
+
+// метод добавления в массив .push()
+const arrAlex = [];
