@@ -1,9 +1,24 @@
 'use strict';
 
-// const fruit = 'Some fruit';
+function first() {
+  setTimeout(function () {
+    console.log(1);
+  }, 500);
+}
 
-// console.log(fruit.indexOf('w'));
+function second() {
+  console.log(2);
+}
 
-// const logg = 'Hello World';
-// console.log(logg.slice(6, 11)); //Указываем что мы хотим вернуть со строки (с какого по какой символ)
-// //World
+first();
+second();
+
+function learnJS(lang, callback) {
+  console.log(`Я учу ${lang}`);
+  callback();
+}
+
+function done() {
+  console.log('Я прошел этот урок');
+}
+learnJS('JavaScript', done);
