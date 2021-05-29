@@ -1,39 +1,9 @@
 'use strict';
 
-let num = 50;
+// const fruit = 'Some fruit';
 
-// while (num <= 55) {
-//   console.log(num);
-//   num++;
-// }
+// console.log(fruit.indexOf('w'));
 
-// do {
-//   console.log(num);
-//   num++
-// }
-// while (num < 55);
-
-for (let i = 1; i < 8; i++) {
-  if (i == 6) {
-    // break;
-    continue;
-  }
-  console.log(i);
-}
-
-function createCounter() {
-  let counter = 0;
-  const myFunction = function () {
-    counter = counter + 1;
-    return counter;
-  };
-
-  return myFunction;
-}
-const increment = createCounter();
-const c1 = increment();
-const c2 = increment();
-const c3 = increment();
-console.log('example increment', c1, c2, c3);
-
-const fruit = 'orange';
+// const logg = 'Hello World';
+// console.log(logg.slice(6, 11)); //Указываем что мы хотим вернуть со строки (с какого по какой символ)
+// //World
