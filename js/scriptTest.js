@@ -1,24 +1,34 @@
 'use strict';
 
-function first() {
-  setTimeout(function () {
-    console.log(1);
-  }, 500);
-}
+//
+// PROTOtype
 
-function second() {
-  console.log(2);
-}
+console.dir([1, 2, 3, 'a', 'l']);
 
-first();
-second();
+const soldier = {
+  health: 400,
+  armor: 100,
+  sayHello: function () {
+    console.log('Hello!');
+  }
+};
 
-function learnJS(lang, callback) {
-  console.log(`Я учу ${lang}`);
-  callback();
-}
+const john = {
+  health: 100
+};
 
-function done() {
-  console.log('Я прошел этот урок');
-}
-learnJS('JavaScript', done);
+//john.__proto__ = soldier; // такой синтаксис не используется
+
+//Современные команды:
+// Object.create(); - создание объекта с определенным прототипом
+// Object.getPrototypeOf(); - получение этого прототипа
+// Object.setPrototypeOf(); - установка этого прототипа
+
+Object.setPrototypeOf(john, soldier); // то же самое, что и john.__proto__ = soldier;
+
+console.log(john.armor);
+john.sayHello();
+console.log(john);
+
+const alex = Object.create(soldier);
+alex.sayHello();

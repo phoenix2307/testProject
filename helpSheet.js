@@ -70,10 +70,10 @@ arr3.forEach(function (item, i, arr3) {
 
 // split / join
 const str = prompt('', '');
-const products = str.split(', '); // разделение строки на элементы массива
+// const products = str.split(', '); // разделение строки на элементы массива
 // Метод str.split(delim) разбивает строку на массив по заданному разделителю delim.
-console.log(products);
-console.log(products.join('****+++**** ')); // склеивание обратно этих элементов в строку с заданым разделителем
+//console.log(products);
+//console.log(products.join('****+++**** ')); // склеивание обратно этих элементов в строку с заданым разделителем
 // Метод arr.join(glue) делает в точности противоположное split. Он создаёт строку из элементов arr, вставляя glue между ними.
 
 // sort - сортирует содержимое массивов по принципц строк. С цифрами нужна доработка
@@ -102,6 +102,39 @@ function compareNum(a, b) {
   return a - b;
 }
 console.log(arrNum);
+
+//
+// Копирование массивов
+// .slice()
+const oldArray = ['a', 'b', 'c'];
+const newArray = oldArray.slice();
+
+newArray[1] = 'asdxcvvfe';
+console.log(oldArray);
+console.log(newArray);
+
+//
+// .spread разворачивает объекты / массивы в отдельные составляющие
+const video = ['youtube', 'vimeo', 'rutube'],
+  blogs = ['wordpress', 'livejournal', 'blogger'],
+  internet = [...video, ...blogs, 'vk', 'facebook']; // здесь будут складироваться оба массива + еще что-нибудь
+// spred - синтаксис: ... перед объект, который мы будем разворачивать
+console.log(internet);
+
+
+function log(a, b, c) {
+  console.log(a);
+  console.log(b);
+  console.log(c);
+}
+// например нужно подставить аргументы в функцию, но у нас они пришли в виде единого массива num2.
+
+const num2 = [2, 5, 7];
+log(...num2);
+// spread разворачивает / расскладывает его на составляющие и функция получает свои аргументы по одному
+
+const array = ['a', 'b'];
+const cloneArray = [...array];
 
 
 
@@ -229,7 +262,63 @@ const numbers = {
 const newNumbers = copy(numbers);
 
 newNumbers.a = 100; // все работает Ок
-newNumbers.c.x = 100; // изменяет свойство x в обоих обьектах
+newNumbers.c.x = 100; // изменяет свойство x в обоих обьектах, 
+//потому что newNumbers.c - это объект и для него уже снова работает ссылочный тип.
 
 console.log(newNumbers);
 console.log(numbers);
+
+//
+// Object.assign(target, sources) - объединяет два объекта в одну независимую копию объединенных объектов.
+// Но тут также есть проблема с вложенными свойствами - они идут по ссылке.
+const add = {
+  d: 17,
+  e: 20
+};
+console.log(Object.assign(numbers, add)); // { a: 2, b: 5, c: { x: 100, y: 4 }, d: 17, e: 20 }
+const clone = Object.assign({}, add); // создание независимой копии существующего объекта
+
+//
+// ...spread - копирование объекта
+const q = {
+  one: 1,
+  two: 2
+};
+
+const cloneObj = {
+  ...q
+};
+
+
+//
+/////////////////////////// PROTOtype////////////////////////////////////////
+
+console.dir([1, 2, 3, 'a', 'l']);
+
+const soldier = {
+  health: 400,
+  armor: 100,
+  sayHello: function () {
+    console.log('Hello!');
+  }
+};
+
+const john = {
+  health: 100
+};
+
+//john.__proto__ = soldier; // такой синтаксис не используется
+
+//Современные команды:
+// Object.create(); - создание объекта с определенным прототипом
+// Object.getPrototypeOf(); - получение этого прототипа
+// Object.setPrototypeOf(); - установка этого прототипа
+
+Object.setPrototypeOf(john, soldier); // то же самое, что и john.__proto__ = soldier;
+
+console.log(john.armor);
+john.sayHello();
+console.log(john);
+
+const alex = Object.create(soldier);
+alex.sayHello();
