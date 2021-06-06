@@ -24,17 +24,27 @@ const movieDB = {
     ]
 };
 
-// 1) Первое задание
-document.querySelector('.promo__adv').remove();
+const adv = document.querySelectorAll('.promo__adv img'),
+    poster = document.querySelector('.promo__bg'),
+    genre = poster.querySelector('.promo__genre'),
+    movieList = document.querySelector('.promo__interactive-list');
 
-// 2) Второе задание
+adv.forEach(item => {
+    item.remove();
+});
 
-// document.querySelector('.promo__genre').replaceWith(genreDrama);
-document.querySelector('.promo__genre').remove();
-const divGenre = document.querySelector('.promo__bg');
-divGenre.insertAdjacentHTML('afterbegin', '<div class="promo__genre">ДРАМА</div>');
+genre.textContent = 'драма';
 
-// 3) 
+poster.style.backgroundImage = 'url("img/bg.jpg")';
 
-// divGenre.style.backgroundImage = '../img/bg.jpg';
-// 4)
+movieList.innerHTML = '';
+
+movieDB.movies.sort();
+
+movieDB.movies.forEach((film, index) => {
+    movieList.innerHTML += `
+    <li class="promo__interactive-item">${index + 1} ${film}
+        <div class="delete"></div>
+    </li>
+    `;
+})
