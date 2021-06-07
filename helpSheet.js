@@ -322,3 +322,194 @@ console.log(john);
 
 const alex = Object.create(soldier);
 alex.sayHello();
+
+
+
+//////////////////////////////////// // Работа со страницей //
+// для просмотра шпаргалки использовать e:\IT\UDEMY курс\dom_2\elements\index.html
+// Часть 1
+/*
+const box = document.getElementById('');
+
+const btns = document.getElementsByTagName('button');
+
+// ВАЖНО
+// При получении элементов через метод .getElementsByTagName(), мы ВСЕГДА получаем псевдомассив (HTMLCollection)
+// И даже если там только один элемент, мы относимся к нему как единственному элементу массива
+// И обращаемcя к нему по синтаксису массива: btns[0];
+
+const circles = document.getElementsByClassName('circle');
+// также получаем HTMLCollection
+
+const hearts = document.querySelectorAll('.heart');
+// Получаем NodeList - это тоже псевдомассив, но уже с некоторыми методами
+// которых нет в HTMLCollection. Например метод forEach().
+
+hearts.forEach(item => {
+  console.log(item);
+});
+
+const oneHeart = document.querySelector('.heart');
+// Вытаскивает со страницы только один элемент с указаным селектором (если
+// таких селекторов много, то к нам попадает только первый)
+*/
+
+/*
+Часть 2
+const box = document.getElementById('box'),
+  btns = document.getElementsByTagName('button'), // collection
+  circles = document.getElementsByClassName('circle'), //collection
+  hearts = document.querySelectorAll('.heart'), //collection
+  oneHeart = document.querySelector('.heart'),
+  wrapper = document.querySelector('.wrapper');
+
+// Добавление стилей элементам страницы
+box.style.backgroundColor = 'blue';
+box.style.width = '500px';
+
+box.style.cssText = 'background-color: green; width: 600px';
+// это же можно делать и с обратными скобками и динамически подставлять тууда значения каких-то переменных:
+// `background-color: green; width: ${num}px`;
+
+// Обращение к элементам, которые находятся в псевдомассивах
+btns[1].style.borderRadius = '100%';
+circles[0].style.backgroundColor = 'red';
+
+// for (let i = 0; i < hearts.length; i++) {
+//   hearts[i].style.backgroundColor = 'yellow';
+// }
+
+hearts.forEach(item => {
+  item.style.backgroundColor = 'blue';
+});
+
+// Создание элементов страницы (но это все пока что только в скрипте)
+const div = document.createElement('div');
+// const text = document.createTextNode('Тут был я');
+
+div.classList.add('black'); // добавление класса 'black' элементу div
+
+// Добавляем элементы непосредственно на HTMLpage
+
+document.body.append(div);
+wrapper.append(div); // в конец объекта
+// wrapper.appendChild(div); в конец объекта - старый метод
+
+// wrapper.prepend(div); в начало объекта
+
+// hearts[2].before(div); после элемента
+// wrapper.insertBefore(div, hearts[0]); // - старый метод
+
+// hearts[1].after(div); до элемента
+
+// удаление элемента
+// btns[2].remove();
+// wrapper.removeChild(hearts[1]);
+
+// замена элемента
+// hearts[1].replaceWith(circles[0]);
+// wrapper.replaceChild(circles[0], hearts[0]); // старый метод
+
+// div.innerHTML = '<h1>Hello World</h1>';
+// div.textContent = 'Hi';
+
+// Вставка HTML относительно объекта
+div.insertAdjacentHTML('afterbegin', '<h1>Hello World</h1>'); // вставляет фрагмент в начало элемента
+div.insertAdjacentHTML('afterend', '<h1>Hello World</h1>'); // вставляет фрагмент сразу после элемента
+div.insertAdjacentHTML('beforebegin', '<h1>Hello World</h1>'); // вставляет фрагмент перед элементом
+div.insertAdjacentHTML('beforeend', '<h1>Hello World</h1>'); // вставляет фрагмент в конец (перед концом) элемента
+*/
+
+// Для замены текста в каком-то диве или теге html достаточно просто получить элемент
+// и через innerHTML или textContent добавить необходимое
+const poster = document.querySelector('.promo__bg');
+const genre = poster.querySelector('.promo__genre');
+genre.textContent = 'драма';
+
+// Получить содержимое элемента страницы можно и через innerHTML^
+// const some = document.querySelector('.some').innerHTML;
+
+// 
+//////////////////////////////////////// СОБЫТИЯ ////////////////
+
+const btn = document.querySelector('button');
+// можно запускать обработчик обращаясь к DOM-дереву
+/*
+btn.onclick = () => {
+  alert('button pushed');
+};
+*/
+
+// лучший способ: EventListener
+// в callback функции необязательно должен быть аргумент, но если идет то первым 
+//обязательно аргумент, представляющий событие (event), которое мы вызываем
+// круто то, что мы можем спокойно обратится к свойствам этого евента
+// event.property, например к кому он привязан: event.target.
+// Так мы получаем весь элемент, его можно копировать перенаправлять и т.д.
+
+// также при получении элемента через target мы можем делать с ними все, что нужно.
+
+// в этом методе обязательно есть callback функция, но можно сохдать ее отдельно и оперировать ею при необходимости
+
+const logElement = (event) => {
+  console.log(event.target);
+};
+// можно таким образом подготовить типовые функции и вешать их на события по необходимостию
+
+btn.addEventListener('mouseenter', logElement);
+// addEventListener - назначает обработчик а событий, а removeEventListener отменяет его
+btn.removeEventListener('mouseenter', logElement);
+
+btn.addEventListener('mouseenter', (event) => {
+  console.log(event.target);
+  event.target.style.color = 'red';
+});
+btn.addEventListener('mouseenter', (event) => {
+  console.log(event.target);
+  event.target.style.backgroundColor = 'blue';
+});
+btn.addEventListener('click', (event) => {
+  console.log(event.target);
+  event.target.remove();
+});
+
+// пример работы обработчика ограниченное количество раз
+
+let i = 0;
+const styleElement = (event) => {
+  event.target.style.backgroundColor = 'red';
+  event.target.style.color = 'blue';
+  i++;
+
+  if (i == 2) {
+    btn.removeEventListener('click', styleElement);
+  }
+};
+
+btn.addEventListener('click', styleElement);
+
+// всплытие событий происходит когда одинаковый обработчик привязан к
+// нескольким элементам DOM, в которых есть вложенность
+// первым сработает внутренний элемент (самый вложенный элемент), потом его родитель и так далее по дереву.
+
+/////////////////    ВАЖНО!!!   ///////////////////////////////
+////////// отмена событий браузера по умолчанию ///////////////
+
+
+const link = document.querySelector('a');
+link.addEventListener('click', (event) => {
+  event.preventDefault(); // отмена действий браузера по умолчанию
+  // теперь при клике на ссылку (тег "а") мы не переходим как должны
+  // по умолчанию на ютюб, а выполняем следующеее действие в теле callback функции
+
+  console.log(event.target);
+});
+
+// При необходимости навесить одно событие на разные элементы, пользуем
+// метод forEach (если  дело касается псевдомассивов).
+const btns = document.querySelectorAll('button');
+btns.forEach(btn => {
+  btn.addEventListener('click', logElement, {
+    once: true // еще один как бы аргумент - обработчик запускается только один раз
+  });
+});
