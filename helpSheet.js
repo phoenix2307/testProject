@@ -513,3 +513,56 @@ btns.forEach(btn => {
     once: true // еще один как бы аргумент - обработчик запускается только один раз
   });
 });
+
+// Обращение к узла и элементам DOM: родители дети и соседи))
+// Распространенные задачи
+// обратится к родителю элемента и изменить класс, например
+
+//работаем от родителя
+
+// childNodes, firstChild, lastChild
+console.log(document.body.childNodes); // получение всех узлов, которые находятся внутри родителя body
+// для получения всех эдементов в родителе к сожалению нет такого свойства
+// для этой задачи придется вручную сделать перебор псевдомассива NodeList, который мы получаем
+// от document.body.childNodes. И в процессе перебора избавиться от текстовых узлов (переносов строки)
+// Здесь лучше использовать for ... of - он позволяет юзать break и continue
+
+/*
+console.log(document.body.childNodes);
+
+for (let node of document.body.childNodes) {
+  if (node.nodeName == "#text") { // сюда же можно добавить условие для других типов (комментарии и т.п.)
+    continue;
+  }
+
+  console.log(node);
+}
+*/
+
+// !!! ВАЖНО !!! ноды (узлы) это не элементы. Текстовой нодой например может быть просто й перенос строки
+// Для получения элементов используются другие команды
+
+console.log(document.body.firstChild); //первая нода в родителе
+console.log(document.body.lastChild); // последняя нода в родителе
+
+console.log(document.body.firstElementChild); //первый элемент в родителе
+console.log(document.body.lastElementChild); // последний эдемент в родителе
+
+// ///////////////////////////////////////////////////// работаем от детей
+
+console.log(document.querySelector('#current').parentNode); // родительский узел
+// при дублировании .parentNode в строке кода мы поднимамся к родителю уровнем выше (к деду) и т.д.
+
+// data- атрибуты (позволяют как-то шаблонизировать определенные части кода по какому-то признаку)
+// на эти data-атрибуты очень удобно ориентироваться в скриптах (лучше чем с #id)
+// обращение к аргументу:
+console.log(document.querySelector('[data-current="3"]'));
+// с помощью nextSibling и previousSibling получаем следующий либо предыдущий узел
+console.log(document.querySelector('[data-current="3"]').nextSibling);
+console.log(document.querySelector('[data-current="3"]').previousSibling);
+
+// команды для обращения к элементам:
+
+console.log(document.querySelector('#current').parentElement);
+console.log(document.querySelector('[data-current="3"]').nextElementSibling);
+console.log(document.querySelector('[data-current="3"]').previousElementSibling);
