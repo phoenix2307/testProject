@@ -70,7 +70,7 @@ arr3.forEach(function (item, i, arr3) {
 
 // split / join
 const str = prompt('', '');
-// const products = str.split(', '); // разделение строки на элементы массива
+// const products = str.split(''); // разделение строки на элементы массива
 // Метод str.split(delim) разбивает строку на массив по заданному разделителю delim.
 //console.log(products);
 //console.log(products.join('****+++**** ')); // склеивание обратно этих элементов в строку с заданым разделителем
