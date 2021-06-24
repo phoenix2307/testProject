@@ -154,6 +154,19 @@ const options = {
 // Получение значения свойства/ключа объекта console.log(options.colors.border) or console.log(options['colors'].border);
 // console.log(options['colors']['border']);
 
+// сокращенный способ записи обьекта
+let cat = 'sdfsf';
+let dog = 'waafwawf';
+let bird = 'rfhrfh';
+
+let someObj = {
+  cat,
+  dog,
+  bird
+};
+
+console.log(someObj); // { cat: 'sdfsf', dog: 'waafwawf', bird: 'rfhrfh' }
+
 // удаление свойств объекта / delete key of object
 // delete options.colors;
 // console.log(options);
@@ -546,13 +559,14 @@ console.log(document.body.firstChild); //первая нода в родител
 console.log(document.body.lastChild); // последняя нода в родителе
 
 console.log(document.body.firstElementChild); //первый элемент в родителе
-console.log(document.body.lastElementChild); // последний эдемент в родителе
+console.log(document.body.lastElementChild); // последний эдемент в родителе  
 
 // ///////////////////////////////////////////////////// работаем от детей
 
 console.log(document.querySelector('#current').parentNode); // родительский узел
 // при дублировании .parentNode в строке кода мы поднимамся к родителю уровнем выше (к деду) и т.д.
 
+//                                   ////    data    ////
 // data- атрибуты (позволяют как-то шаблонизировать определенные части кода по какому-то признаку)
 // на эти data-атрибуты очень удобно ориентироваться в скриптах (лучше чем с #id)
 // обращение к аргументу:
