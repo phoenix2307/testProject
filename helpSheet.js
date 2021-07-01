@@ -38,8 +38,20 @@ const test = '12.5px';
 console.log(parseInt(test)); // 12 в целые
 console.log(parseFloat(test)); // 12.5 в дробные
 
+/*
+**************************************************** Операторы ****************************
+
+Тернарный оператор - ?
+
+(условие) ? действие1:действие2
+?  - аналог if
+: - аналог else
+то есть: если (условие) выполняяется или равно true, то выполнится действие1
+иначе выполнится действие2
+*/
+
 //
-////////////////////////////////////////////////// МАССИВЫ / Array
+// ********************************************* МАССИВЫ / Array ***********************
 
 const arr = [1, 2, 3, 6, 8];
 
@@ -56,15 +68,15 @@ console.log(arr);
 
 const arr2 = [5, 4, 6, 7, 34, 23];
 for (let item of arr2) {
-  console.log(item);
+    console.log(item);
 } // У метода for ... of есть преимущество: тут можно использовать break и continue для остановеи перебора
 
 const arr3 = [5, 54, 6, 87, 134, 303];
 arr3.forEach(function (item, i, arr3) {
-  // item - элемент массива
-  // i - индекс элемента
-  // arr3 - перебираемый массив
-  console.log(`${i}: ${item} внутри массива ${arr3}`);
+    // item - элемент массива
+    // i - индекс элемента
+    // arr3 - перебираемый массив
+    console.log(`${i}: ${item} внутри массива ${arr3}`);
 
 });
 
@@ -99,7 +111,7 @@ const arrNum = [23, 7, 80, 5, 11, 83, 26, 7, 9];
 arrNum.sort(compareNum);
 // .sort использует принцип быстрой сортировки. Все что нужно это дать ему ф-цию сравнения двух чисел.
 function compareNum(a, b) {
-  return a - b;
+    return a - b;
 }
 console.log(arrNum);
 
@@ -116,16 +128,16 @@ console.log(newArray);
 //
 // .spread разворачивает объекты / массивы в отдельные составляющие
 const video = ['youtube', 'vimeo', 'rutube'],
-  blogs = ['wordpress', 'livejournal', 'blogger'],
-  internet = [...video, ...blogs, 'vk', 'facebook']; // здесь будут складироваться оба массива + еще что-нибудь
+    blogs = ['wordpress', 'livejournal', 'blogger'],
+    internet = [...video, ...blogs, 'vk', 'facebook']; // здесь будут складироваться оба массива + еще что-нибудь
 // spred - синтаксис: ... перед объект, который мы будем разворачивать
 console.log(internet);
 
 
 function log(a, b, c) {
-  console.log(a);
-  console.log(b);
-  console.log(c);
+    console.log(a);
+    console.log(b);
+    console.log(c);
 }
 // например нужно подставить аргументы в функцию, но у нас они пришли в виде единого массива num2.
 
@@ -139,16 +151,19 @@ const cloneArray = [...array];
 
 
 //
-//////////////////////////////////////////////////// ОБЪЕКТЫ / Objects //
+//*********************************************** ОБЪЕКТЫ / Objects *************************
+//
+
+
 
 const options = {
-  name: 'test',
-  width: 1024,
-  height: 1024,
-  colors: {
-    border: 'black',
-    bg: 'red'
-  }
+    name: 'test',
+    width: 1024,
+    height: 1024,
+    colors: {
+        border: 'black',
+        bg: 'red'
+    }
 };
 
 // Получение значения свойства/ключа объекта console.log(options.colors.border) or console.log(options['colors'].border);
@@ -160,9 +175,9 @@ let dog = 'waafwawf';
 let bird = 'rfhrfh';
 
 let someObj = {
-  cat,
-  dog,
-  bird
+    cat,
+    dog,
+    bird
 };
 
 console.log(someObj); // { cat: 'sdfsf', dog: 'waafwawf', bird: 'rfhrfh' }
@@ -175,35 +190,56 @@ console.log(someObj); // { cat: 'sdfsf', dog: 'waafwawf', bird: 'rfhrfh' }
 // изменение свойств обьекта
 // options.name = 'It work';
 
-// ПЕРЕБОР свойств объекта
+/*
+************************************ Добавление данных в объект *********************
+const obj = {
+    part1: 'prop1',
+    part2: 'prop2',
+    part3: 'prop3'
+};
+Например, берем данные у опросника prompt()
+const a = prompt('Как вас зовут?');
+const b = prompt('Кем вы работаете?');
+obj.part1[a] = b;
+//obj.part1[a] - создаем первое свойство obj.part1. Берем его из переменной const a = prompt('Как вас зовут?')
+//obj.part1[a] = b - присваиваем этому свойству значение из переменной const b = prompt('Кем вы работаете?')
+// таким образом в первое свойство (a) запишеться его зачение (b)
+{Alex: 'programmer'}
+
+*/
+
+
+
+// **************************************************** ПЕРЕБОР свойств объекта *****************
+
 //можно использовать для получения списка / массива всех свойст (первого уровня)
 // если есть вложенные, то придется добавлять еще один перебор, с проверкой на тип вложенных свойств
 for (let key in options) {
-  if (typeof (options[key]) === 'object') {
-    for (let i in options[key]) {
-      console.log(`Свойство ${i} имеет значение ${options[key][i]}`);
+    if (typeof (options[key]) === 'object') {
+        for (let i in options[key]) {
+            console.log(`Свойство ${i} имеет значение ${options[key][i]}`);
+        }
+    } else {
+        console.log(`Свойство ${key} имеет значение ${options[key]}`);
     }
-  } else {
-    console.log(`Свойство ${key} имеет значение ${options[key]}`);
-  }
 }
 
 // Посчитать количество свойств объекта
 const obj2 = {
-  name: 'Alex',
-  age: 40,
-  merried: true,
-  proff: ['developer', 'programmer'],
-  skills: {
-    'честность': 10,
-    'токсичность': 5,
-    'стремление': 10
-  }
+    name: 'Alex',
+    age: 40,
+    merried: true,
+    proff: ['developer', 'programmer'],
+    skills: {
+        'честность': 10,
+        'токсичность': 5,
+        'стремление': 10
+    }
 };
 
 let counter = 0;
 for (let key in obj2) {
-  counter++;
+    counter++;
 }
 console.log(counter);
 
@@ -213,11 +249,11 @@ console.log(Object.keys(obj2).length); // возвращает количест�
 
 // Создание собственного метода
 const myFirstMetod = {
-  name: 'Alex',
-  age: 40,
-  go: function () {
-    console.log('My target - developer');
-  }
+    name: 'Alex',
+    age: 40,
+    go: function () {
+        console.log('My target - developer');
+    }
 };
 
 myFirstMetod.go();
@@ -225,22 +261,22 @@ myFirstMetod.go();
 //
 // Деструктуризация объекта
 const options2 = {
-  name: 'test',
-  width: 595,
-  height: 595,
-  colors: {
-    border: 'blue',
-    bg: 'pink',
-    light: {
-      high: 36,
-      low: 18
+    name: 'test',
+    width: 595,
+    height: 595,
+    colors: {
+        border: 'blue',
+        bg: 'pink',
+        light: {
+            high: 36,
+            low: 18
+        }
     }
-  }
 };
 
 const {
-  high,
-  low
+    high,
+    low
 } = options2.colors.light;
 console.log(high, low);
 
@@ -255,21 +291,21 @@ console.log(high, low);
 // Это функция поверхностной копии (если внутри объекта будут вложенности, то они не будут 
 // клонироваться а снова по ссылочному типу перенесутся в новый обьект)
 function copy(mainObj) {
-  let objCopy = {};
+    let objCopy = {};
 
-  for (let key in mainObj) {
-    objCopy[key] = mainObj[key];
-  }
-  return objCopy;
+    for (let key in mainObj) {
+        objCopy[key] = mainObj[key];
+    }
+    return objCopy;
 }
 
 const numbers = {
-  a: 2,
-  b: 5,
-  c: {
-    x: 7,
-    y: 4
-  }
+    a: 2,
+    b: 5,
+    c: {
+        x: 7,
+        y: 4
+    }
 };
 
 const newNumbers = copy(numbers);
@@ -285,8 +321,8 @@ console.log(numbers);
 // Object.assign(target, sources) - объединяет два объекта в одну независимую копию объединенных объектов.
 // Но тут также есть проблема с вложенными свойствами - они идут по ссылке.
 const add = {
-  d: 17,
-  e: 20
+    d: 17,
+    e: 20
 };
 console.log(Object.assign(numbers, add)); // { a: 2, b: 5, c: { x: 100, y: 4 }, d: 17, e: 20 }
 const clone = Object.assign({}, add); // создание независимой копии существующего объекта
@@ -294,14 +330,35 @@ const clone = Object.assign({}, add); // создание независимой
 //
 // ...spread - копирование объекта
 const q = {
-  one: 1,
-  two: 2
+    one: 1,
+    two: 2
 };
 
 const cloneObj = {
-  ...q
+    ...q
 };
 
+
+// глубокое клонирование с помощью JSON:
+
+
+
+const testAlex = {
+    age: 40,
+    phone: 80508033711,
+    parents: {
+        mom: 'Lidia',
+        dad: 'Petr',
+        sister: 'Natali'
+    }
+};
+
+// console.log(JSON.stringify(alex));
+const cloneAlex = JSON.parse(JSON.stringify(testAlex));
+cloneAlex.parents.sister = 'Marina';
+console.log(testAlex);
+console.log(cloneAlex);
+// создается полностью независимая глубокая копия объекта
 
 //
 /////////////////////////// PROTOtype////////////////////////////////////////
@@ -309,15 +366,15 @@ const cloneObj = {
 console.dir([1, 2, 3, 'a', 'l']);
 
 const soldier = {
-  health: 400,
-  armor: 100,
-  sayHello: function () {
-    console.log('Hello!');
-  }
+    health: 400,
+    armor: 100,
+    sayHello: function () {
+        console.log('Hello!');
+    }
 };
 
 const john = {
-  health: 100
+    health: 100
 };
 
 //john.__proto__ = soldier; // такой синтаксис не используется
@@ -465,7 +522,7 @@ btn.onclick = () => {
 // в этом методе обязательно есть callback функция, но можно сохдать ее отдельно и оперировать ею при необходимости
 
 const logElement = (event) => {
-  console.log(event.target);
+    console.log(event.target);
 };
 // можно таким образом подготовить типовые функции и вешать их на события по необходимостию
 
@@ -474,29 +531,29 @@ btn.addEventListener('mouseenter', logElement);
 btn.removeEventListener('mouseenter', logElement);
 
 btn.addEventListener('mouseenter', (event) => {
-  console.log(event.target);
-  event.target.style.color = 'red';
+    console.log(event.target);
+    event.target.style.color = 'red';
 });
 btn.addEventListener('mouseenter', (event) => {
-  console.log(event.target);
-  event.target.style.backgroundColor = 'blue';
+    console.log(event.target);
+    event.target.style.backgroundColor = 'blue';
 });
 btn.addEventListener('click', (event) => {
-  console.log(event.target);
-  event.target.remove();
+    console.log(event.target);
+    event.target.remove();
 });
 
 // пример работы обработчика ограниченное количество раз
 
 let i = 0;
 const styleElement = (event) => {
-  event.target.style.backgroundColor = 'red';
-  event.target.style.color = 'blue';
-  i++;
+    event.target.style.backgroundColor = 'red';
+    event.target.style.color = 'blue';
+    i++;
 
-  if (i == 2) {
-    btn.removeEventListener('click', styleElement);
-  }
+    if (i == 2) {
+        btn.removeEventListener('click', styleElement);
+    }
 };
 
 btn.addEventListener('click', styleElement);
@@ -511,20 +568,20 @@ btn.addEventListener('click', styleElement);
 
 const link = document.querySelector('a');
 link.addEventListener('click', (event) => {
-  event.preventDefault(); // отмена действий браузера по умолчанию
-  // теперь при клике на ссылку (тег "а") мы не переходим как должны
-  // по умолчанию на ютюб, а выполняем следующеее действие в теле callback функции
+    event.preventDefault(); // отмена действий браузера по умолчанию
+    // теперь при клике на ссылку (тег "а") мы не переходим как должны
+    // по умолчанию на ютюб, а выполняем следующеее действие в теле callback функции
 
-  console.log(event.target);
+    console.log(event.target);
 });
 
 // При необходимости навесить одно событие на разные элементы, пользуем
 // метод forEach (если  дело касается псевдомассивов).
 const btns = document.querySelectorAll('button');
 btns.forEach(btn => {
-  btn.addEventListener('click', logElement, {
-    once: true // еще один как бы аргумент - обработчик запускается только один раз
-  });
+    btn.addEventListener('click', logElement, {
+        once: true // еще один как бы аргумент - обработчик запускается только один раз
+    });
 });
 
 // Обращение к узла и элементам DOM: родители дети и соседи))
